@@ -56,8 +56,8 @@
                                     <th style="text-align: center; border-top: none !important;">Humidity</th>
                                 </tr>
                                 <tr>
-                                    <td class="text-success" style="border-top: none !important;">{{home.city.main.temp}}&#8457;</td>
-                                    <td class="text-success" style="border-top: none !important;">{{home.city.main.pressure}}atm</td>
+                                    <td class="text-success" style="border-top: none !important;">{{home.city.main.temp | number: 2}}&#8457;</td>
+                                    <td class="text-success" style="border-top: none !important;">{{home.city.main.pressure}}hPa</td>
                                     <td class="text-success" style="border-top: none !important;">{{home.city.main.humidity}}%</td>
                                 </tr>
                             </table>
@@ -68,8 +68,8 @@
                                     <th style="text-align: center; border-top: none !important;">Wind Speed</th>
                                 </tr>
                                 <tr>
-                                    <td class="text-success" style="border-top: none !important;">{{home.city.main.temp_max}}&#8457;</td>
-                                    <td class="text-success" style="border-top: none !important;">{{home.city.main.temp_min}}&#8457;</td>
+                                    <td class="text-success" style="border-top: none !important;">{{home.city.main.temp_min | number: 2}}&#8457;</td>
+                                    <td class="text-success" style="border-top: none !important;">{{home.city.main.temp_max | number: 2}}&#8457;</td>
                                     <td class="text-success" style="border-top: none !important;">{{home.city.wind.speed}}mph</td>
                                 </tr>
                             </table>
@@ -82,9 +82,8 @@
                             <h3 class="panel-title panel-info">Search History</h3>
                         </div>
                         <div class="panel-body">
-                            <table class="table table-striped">
-                                <tr ng-repeat="search in home.searches">
-                                    <!--ng-repeat="search in home.searches"-->
+                            <table class="table table-striped table-hover">
+                                <tr ng-repeat="search in home.searches | limitTo: -5" ng-click="home.callWeatherApi(search.city)" style="cursor: pointer; cursor: hand;">
                                     <td style="text-align: center; vertical-align: center;">{{search.city}}</td>
                                     <td style="text-align: center;">{{search.date}}
                                         <br>{{search.time}}</td>
@@ -96,12 +95,9 @@
             </div>
         </div>
     </div>
-    <!-- jQuery -->
     <script src="//code.jquery.com/jquery.js"></script>
-    <!-- Bootstrap JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="bower_components/angular/angular.js"></script>
-    <!-- SHORTCUT: script:src -->
     <script src="app/app.module.js"></script>
     <script src="app/home/home.controller.js"></script>
     <script type="text/javascript" src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
