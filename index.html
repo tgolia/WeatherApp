@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Weather App</title>
     <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="bower_components/angular-toastr/dist/angular-toastr.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -44,7 +45,7 @@
                         </div>
                         <div class="panel-body panel-info">
                             <div class="row text-center" style="font-size: 200%">
-                                <img class="img" ng-src={{home.iconUrl}} alt="Weather Icon">{{home.city.name}}
+                                <img class="img" ng-src={{home.iconUrl}} alt="Weather Icon" ng-click='home.secret()'>{{home.city.name}}
                             </div>
                             <p>Lat/Long: {{home.city.coord.lat}},{{home.city.coord.lon}}</p>
                             <hr size=5>
@@ -103,6 +104,7 @@
     <!-- SHORTCUT: script:src -->
     <script src="app/app.module.js"></script>
     <script src="app/home/home.controller.js"></script>
+    <script type="text/javascript" src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
 </body>
 
 </html>
