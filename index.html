@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="" ng-app="app">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <div class="container-fluid" ng-controller="WeatherController as home">
+        <div class="well well-lg" style="margin-top: 20px;">
+            <h1 class="text-center" style="font-size: 500%">Weather App</h1>
+            <h3 class="text-center"><i>Is there really a point to having a weather app in San Diego?</i></h3>
+        </div>
+        <div class="btn-group btn-primary" role="group" aria-label="First group" style="border-radius: 25%">
+            <button type="button" class="btn btn-primary" ng-click="home.callWeatherApi('San Diego')">San Diego</button>
+            <button type="button" class="btn btn-primary" ng-click="home.callWeatherApi('Timbuktu')">Timbuktu</button>
+            <button type="button" class="btn btn-primary" ng-click="home.callWeatherApi('Ouagadougou')">Ouagadougou</button>
+            <button type="button" class="btn btn-primary" ng-click="home.callWeatherApi('Tashkent')">Tashkent</button>
+            <button type="button" class="btn btn-primary" ng-click="home.callWeatherApi('North Pole')">North Pole</button>
+            <button type="button" class="btn btn-primary" ng-click="home.callWeatherApi('Bora Bora')">Bora Bora</button>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for..." ng-model='home.input'>
+                    <span class="input-group-btn">
+                        <button class="btn btn-success" type="button" ng-click='home.callWeatherApi(home.input)'>Weather Me!</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div ng-hide="home.hidden">
+            <div class="row text-center" id="details" style="margin-top: 10px;">
+                <div class="col-md-6 text-center">
+                    <div class="panel panel-info">
+                        <div class="panel-heading panel-info">
+                            <h3 class="panel-title">City Information</h3>
+                        </div>
+                        <div class="panel-body panel-info">
+                            <div class="row text-center" style="font-size: 200%">
+                                <img class="img" ng-src={{home.iconUrl}} alt="Weather Icon">{{home.city.name}}
+                            </div>
+                            <p>Lat/Long: {{home.city.coord.lat}},{{home.city.coord.lon}}</p>
+                            <hr size=5>
+                            <table class="table text-center" id="firstTable">
+                                <tr>
+                                    <th style="text-align: center; border-top: none !important;">Temperature (&#8457;)</th>
+                                    <th style="text-align: center; border-top: none !important;">Pressure</th>
+                                    <th style="text-align: center; border-top: none !important;">Humidity</th>
+                                </tr>
+                                <tr>
+                                    <td class="text-success" style="border-top: none !important;">{{home.city.main.temp}}&#8457;</td>
+                                    <td class="text-success" style="border-top: none !important;">{{home.city.main.pressure}}atm</td>
+                                    <td class="text-success" style="border-top: none !important;">{{home.city.main.humidity}}%</td>
+                                </tr>
+                            </table>
+                            <table class="table">
+                                <tr>
+                                    <th style="text-align: center; border-top: none !important;">Lowest Temp (&#8457;)</th>
+                                    <th style="text-align: center; border-top: none !important;">Highest Temp (&#8457;)</th>
+                                    <th style="text-align: center; border-top: none !important;">Wind Speed</th>
+                                </tr>
+                                <tr>
+                                    <td class="text-success" style="border-top: none !important;">{{home.city.main.temp_max}}&#8457;</td>
+                                    <td class="text-success" style="border-top: none !important;">{{home.city.main.temp_min}}&#8457;</td>
+                                    <td class="text-success" style="border-top: none !important;">{{home.city.wind.speed}}mph</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-info">
+                        <div class="panel-heading panel-info">
+                            <h3 class="panel-title panel-info">Search History</h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-striped">
+                                <tr ng-repeat="search in home.searches">
+                                    <!--ng-repeat="search in home.searches"-->
+                                    <td style="text-align: center; vertical-align: center;">{{search.city}}</td>
+                                    <td style="text-align: center;">{{search.date}}
+                                        <br>{{search.time}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <!-- SHORTCUT: script:src -->
+    <script src="app/app.module.js"></script>
+    <script src="app/home/home.controller.js"></script>
+</body>
+
+</html>
